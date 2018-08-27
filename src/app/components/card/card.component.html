@@ -1,3 +1,27 @@
-<p>
-  card works!
-</p>
+<div *ngFor="let card of cards">
+    <div class="card bg-default"
+         [class.bg-before-due-date]="card.dueDate - todayDate < 1000*3600*24*2"
+         [class.bg-due-date]="card.dueDate - todayDate < 1000*3600*24"
+         [class.bg-past-due]="card.dueDate - todayDate < 0">
+        <div class="card-body">
+            <form class="card-title">
+                <input type="text"
+                       class="form-control font-weight-bold border-0"
+                       placeholder="Enter title"
+                       [(ngModel)]="card.title"
+                       name="title"
+                       autofocus>
+            </form>
+            <div class="card-text">
+                <form>
+                    <input type="text"
+                           class="form-control border-0"
+                           placeholder="Enter text"
+                           [(ngModel)]="card.description"
+                           name="description">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,3 +1,28 @@
-<p>
-  list works!
-</p>
+<section *ngFor="let list of lists"
+         class="col-lg-3 col-md-6 mb-3">
+
+    <div class="card">
+        <div class="card-body">
+            <form class="card-title">
+                <input type="text"
+                       class="form-control font-weight-bold border-0"
+                       placeholder="Enter title"
+                       [(ngModel)]="list.title"
+                       name="title"
+                       autofocus>
+            </form>
+            <p class="card-text">
+                <app-card [cards]="list.cards">
+                </app-card>
+            </p>
+            <button type="button"
+                    class="btn btn-link card-link"
+                    (click)="addCard(list.id)"
+            >
+                + Add a card
+            </button>
+        </div>
+    </div>
+
+
+</section>

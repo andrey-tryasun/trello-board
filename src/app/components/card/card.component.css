@@ -1,0 +1,15 @@
+.bg-default {
+    background-color: lightgray;
+}
+
+.bg-before-due-date {
+    background-color: yellow;
+}
+
+.bg-due-date {
+    background-color: orange;
+}
+
+.bg-past-due {
+    background-color: red;
+}

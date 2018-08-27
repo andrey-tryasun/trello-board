@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
@@ -15,6 +16,7 @@ import { CardComponent } from './components/card/card.component';
     ],
     imports: [
         BrowserModule,
+        FormsModule,
         NgbModule,
         DragulaModule.forRoot()
     ],
