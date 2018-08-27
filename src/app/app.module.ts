@@ -4,10 +4,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
+import { ListComponent } from './components/list/list.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        ListComponent,
+        CardComponent
     ],
     imports: [
         BrowserModule,
