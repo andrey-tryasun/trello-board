@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ListService } from '../../services/list.service';
 import { List } from '../../services/list';
-import { CardService } from '../../services/card.service';
 
 @Component({
     selector: 'app-list',
@@ -13,12 +12,19 @@ export class ListComponent implements OnInit {
 
     constructor(
         private listService: ListService,
-        private cardService: CardService
     ) {
     }
 
+    addList(): void {
+        this.lists = this.listService.addList();
+    }
+
+    deleteList(id: number): void {
+        this.lists = this.listService.deleteList(id);
+    }
+
     addCard(id: number): void {
-        this.lists = this.cardService.addCard(this.lists, id);
+        // this.lists = this.listService.addCard(this.lists, id);
     }
 
     ngOnInit() {

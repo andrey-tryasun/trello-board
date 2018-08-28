@@ -3,26 +3,31 @@
 
     <div class="card">
         <div class="card-body">
-            <form class="card-title">
-                <input type="text"
-                       class="form-control font-weight-bold border-0"
-                       placeholder="Enter title"
-                       [(ngModel)]="list.title"
-                       name="title"
-                       autofocus>
-            </form>
+            <div class="card-title d-flex flex-nowrap justify-content-between">
+                <form class="flex-fill">
+                    <input type="text"
+                           class="form-control font-weight-bold border-0"
+                           placeholder="Enter list title"
+                           [(ngModel)]="list.title"
+                           name="title"
+                           autofocus>
+                </form>
+                <button type="button"
+                        class="btn btn-light bg-transparent border-0 ml-1 p-1"
+                        (click)="deleteList(list.id)">✕
+                </button>
+            </div>
             <p class="card-text">
-                <app-card [cards]="list.cards">
+                <app-card [list]="list">
                 </app-card>
             </p>
-            <button type="button"
-                    class="btn btn-link card-link"
-                    (click)="addCard(list.id)"
-            >
-                + Add a card
-            </button>
         </div>
     </div>
-
-
 </section>
+
+<div class="col col-md-2">
+    <button type="button"
+            class="btn btn-light"
+            (click)="addList()">+ Add a list
+    </button>
+</div>

@@ -1,21 +1,62 @@
 import { Injectable } from '@angular/core';
 import { List } from './list';
+import { Card } from './card';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ListService {
 
+    private lists: List[] = [];
+    private cards: Card[] = [];
+
     constructor() {
     }
 
     getLists(): List[] {
-        return [];
+        console.log('getLists', this.lists);
+        return this.lists;
     }
 
-    addList(lists: List[]): List[] {
-        const newList = new List();
-        lists.push(newList);
-        return lists;
+    addList(): List[] {
+        this.lists.push(new List({
+            id: Date.now(), // generation of a unique id
+            title: ''
+        }));
+        console.log('addList', this.lists);
+        return this.lists;
+    }
+
+    deleteList(id: number): List[] {
+        this.lists = this.lists.filter(item => item.id !== id);
+        console.log('deleteList', this.lists);
+        return this.lists;
+    }
+
+    getCards(list: List): Card[] {
+        if (this.cards.length) {
+            this.cards = this.cards.filter(item => item.listId === list.id);
+        }
+        console.log('getCards for ', list.id, this.cards);
+        return this.cards;
+    }
+
+    addCard(list: List): Card[] {
+        this.cards.push(new Card({
+            id: Date.now(), // generation of a unique id
+            listId: list.id,
+            title: '',
+            description: '',
+            dueDate: null
+        }));
+        console.log('addCard', this.cards);
+        return this.cards;
+    }
+
+    deleteCard(id: number): Card[] {
+        this.cards = this.cards.filter(item => item.id !== id);
+        console.log('deleteCard', this.cards);
+        return this.cards;
     }
 }
+

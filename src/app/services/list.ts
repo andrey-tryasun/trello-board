@@ -1,7 +1,12 @@
-import { Card } from './card';
-
 export class List {
     id: number;
     title: string;
-    cards: Card[];
+
+    constructor(listData?: List) {
+        if (!listData) {
+            return;
+        }
+        this.id = listData.id;
+        this.title = listData.title;
+    }
 }

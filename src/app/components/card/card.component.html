@@ -1,27 +1,37 @@
 <div *ngFor="let card of cards">
-    <div class="card bg-default"
-         [class.bg-before-due-date]="card.dueDate - todayDate < 1000*3600*24*2"
-         [class.bg-due-date]="card.dueDate - todayDate < 1000*3600*24"
-         [class.bg-past-due]="card.dueDate - todayDate < 0">
-        <div class="card-body">
-            <form class="card-title">
-                <input type="text"
-                       class="form-control font-weight-bold border-0"
-                       placeholder="Enter title"
-                       [(ngModel)]="card.title"
-                       name="title"
-                       autofocus>
-            </form>
-            <div class="card-text">
-                <form>
+    <div class="card bg-default mb-2"
+         [class.bg-before-due-date]="card.dueDate && card.dueDate - todayDate < moreDay"
+         [class.bg-due-date]="card.dueDate && card.dueDate - todayDate < oneDay"
+         [class.bg-past-due]="card.dueDate && card.dueDate - todayDate < 0">
+        <div class="card-body p-1">
+            <div class="card-title d-flex flex-nowrap justify-content-between">
+                <form class="flex-fill">
                     <input type="text"
-                           class="form-control border-0"
-                           placeholder="Enter text"
-                           [(ngModel)]="card.description"
-                           name="description">
+                           class="form-control bg-transparent text-light border-0"
+                           placeholder="Enter card title"
+                           [(ngModel)]="card.title"
+                           name="title"
+                           id="card-title"
+                           autofocus>
                 </form>
+                <button type="button"
+                        class="btn btn-secondary bg-transparent border-0 ml-1 p-1"
+                        (click)="deleteCard(card.id)">…
+                </button>
             </div>
-
+            <p *ngIf="card.description"
+               class="card-text">
+                {{card.description}}
+            </p>
+            <p *ngIf="card.dueDate"
+               class="card-text text-secondary">
+                🕓 {{card.dueDate}}
+            </p>
         </div>
     </div>
 </div>
+<button type="button"
+        class="btn btn-link card-link"
+        (click)="addCard()">
+    + Add a card
+</button>
