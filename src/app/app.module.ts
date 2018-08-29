@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
 import { ListComponent } from './components/list/list.component';
@@ -19,9 +18,7 @@ import { CardDetailsComponent } from './components/card/card-details/card-detail
     imports: [
         BrowserModule,
         FormsModule,
-        NgbModule,
-        DragulaModule.forRoot()
-    ],
+        NgbModule],
     providers: [],
     bootstrap: [AppComponent]
 })
