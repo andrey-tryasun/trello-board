@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Card } from '../../../services/card';
 
@@ -7,9 +7,10 @@ import { Card } from '../../../services/card';
     templateUrl: './card-details.component.html',
     styleUrls: ['./card-details.component.css']
 })
-export class CardDetailsComponent implements OnInit {
+export class CardDetailsComponent {
     @ViewChild('content') modalContent: ElementRef;
-    @Output() submitCard = new EventEmitter();
+    @Output() updateCard = new EventEmitter();
+    @Output() deleteCard = new EventEmitter();
 
     modalReference: any;
     modalTitle: string;
@@ -26,7 +27,6 @@ export class CardDetailsComponent implements OnInit {
     }
 
     edit(card: Card): void {
-        console.log('edit card', card);
         this.modalTitle = 'Card Details';
         this.id = card.id;
         this.listId = card.listId;
@@ -37,24 +37,28 @@ export class CardDetailsComponent implements OnInit {
             this.dueDate = {
                 year: date.getFullYear(),
                 month: date.getMonth() + 1,
-                day: date.getDay()
+                day: date.getDate()
             };
         }
         this.modalReference = this.modalService.open(this.modalContent, {
-            centered: true,
+            centered: false,
             backdrop: 'static',
-            keyboard: true
+            keyboard: true,
+            size: 'sm'
         });
     }
 
-    submit(): void {
-        const date = Date.UTC(
-            this.dueDate.year,
-            this.dueDate.month - 1,
-            this.dueDate.day,
-            0,
-            0,
-            0, 0);
+    update(): void {
+        const date = this.dueDate ?
+            Date.UTC(
+                this.dueDate.year,
+                this.dueDate.month - 1,
+                this.dueDate.day,
+                0,
+                0,
+                0,
+                0)
+            : null;
         const card = new Card({
             id: this.id,
             listId: this.listId,
@@ -63,10 +67,11 @@ export class CardDetailsComponent implements OnInit {
             dueDate: date
         });
         this.modalReference.close();
-        this.submitCard.emit(card);
+        this.updateCard.emit(card);
     }
 
-    ngOnInit() {
+    delete(): void {
+        this.modalReference.close();
+        this.deleteCard.emit(this.id);
     }
-
 }

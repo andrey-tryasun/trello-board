@@ -13,12 +13,12 @@
                            autofocus>
                 </form>
                 <button type="button"
-                        class="btn btn-light bg-transparent border-0 ml-1 p-1"
+                        class="btn btn-light font-weight-bold bg-transparent border-0 ml-1 p-1"
                         (click)="deleteList(list.id)">✕
                 </button>
             </div>
             <p class="card-text">
-                <app-card [list]="list">
+                <app-card [listId]="list.id">
                 </app-card>
             </p>
         </div>

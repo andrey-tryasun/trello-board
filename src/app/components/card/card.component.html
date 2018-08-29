@@ -1,39 +1,46 @@
-<div *ngFor="let card of cards">
-    <div class="card bg-default mb-2"
-         [class.bg-before-due-date]="card.dueDate && card.dueDate - todayDate < moreDay"
-         [class.bg-due-date]="card.dueDate && card.dueDate - todayDate < oneDay"
-         [class.bg-past-due]="card.dueDate && card.dueDate - todayDate < 0">
-        <div class="card-body p-1">
-            <div class="card-title d-flex flex-nowrap justify-content-between">
-                <form class="flex-fill">
-                    <input type="text"
-                           class="form-control bg-transparent text-light border-0"
-                           placeholder="Enter card title"
-                           [(ngModel)]="card.title"
-                           name="title"
-                           id="card-title"
-                           autofocus>
-                </form>
-                <button type="button"
-                        class="btn btn-secondary bg-transparent border-0 ml-1 p-1"
-                        (click)="editCard(card)">…
-                </button>
+<section *ngFor="let card of cards">
+    <div *ngIf="card.listId === listId">
+        <div class="card bg-default mb-2"
+             [class.bg-before-due-date]="card.dueDate && (card.dueDate - todayDate) / oneDay < 1"
+             [class.bg-due-date]="card.dueDate && (card.dueDate - todayDate) / oneDay < 0"
+             [class.bg-past-due]="card.dueDate && (card.dueDate - todayDate) / oneDay  < -1">
+            <div class="card-body p-1">
+                <div class="card-title d-flex flex-nowrap justify-content-between">
+                    <form class="flex-fill">
+                        <input type="text"
+                               class="form-control bg-transparent border-0"
+                               placeholder="Enter card title"
+                               [(ngModel)]="card.title"
+                               name="title"
+                               id="card-title"
+                               autofocus>
+                    </form>
+                    <button type="button"
+                            class="btn btn-light font-weight-bold bg-transparent border-0 ml-1 p-1"
+                            id="btn-editCard"
+                            (click)="editCard(card)">
+                        ⋯
+                    </button>
+                </div>
+                <p *ngIf="card.description"
+                   class="card-text px-2">
+                    {{card.description}}
+                </p>
+                <p *ngIf="card.dueDate"
+                   class="card-text px-2">
+                    🕓 {{card.dueDate | date:'dd-MM-yyyy'}}
+                </p>
             </div>
-            <p *ngIf="card.description"
-               class="card-text">
-                {{card.description}}
-            </p>
-            <p *ngIf="card.dueDate"
-               class="card-text text-secondary">
-                🕓 {{card.dueDate}}
-            </p>
         </div>
     </div>
-</div>
+</section>
+
 <button type="button"
         class="btn btn-link card-link"
         (click)="addCard()">
     + Add a card
 </button>
 
-<app-card-details (submitCard)="updateCard($event)"></app-card-details>
+<app-card-details
+    (updateCard)="updateCard($event)"
+    (deleteCard)="deleteCard($event)"></app-card-details>

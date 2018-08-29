@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ListService } from '../../services/list.service';
 import { List } from '../../services/list';
 
@@ -8,7 +8,8 @@ import { List } from '../../services/list';
     styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-    @Input() lists: List[];
+
+    lists: List[];
 
     constructor(
         private listService: ListService,
@@ -23,11 +24,8 @@ export class ListComponent implements OnInit {
         this.lists = this.listService.deleteList(id);
     }
 
-    addCard(id: number): void {
-        // this.lists = this.listService.addCard(this.lists, id);
-    }
-
-    ngOnInit() {
+    ngOnInit(): void {
+        this.lists = this.listService.getLists();
     }
 
 }

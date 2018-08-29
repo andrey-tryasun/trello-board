@@ -1,5 +1,5 @@
 .bg-default {
-    background-color: gray;
+    background-color: lightgray;
 }
 
 .bg-before-due-date {
@@ -14,6 +14,6 @@
     background-color: red;
 }
 
-#card-title::placeholder {
-    color: lightgray;
+#btn-editCard:focus {
+    box-shadow: none;
 }
