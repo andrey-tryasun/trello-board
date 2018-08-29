@@ -7,12 +7,14 @@ import { DragulaModule } from 'ng2-dragula';
 import { AppComponent } from './app.component';
 import { ListComponent } from './components/list/list.component';
 import { CardComponent } from './components/card/card.component';
+import { CardDetailsComponent } from './components/card/card-details/card-details.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ListComponent,
-        CardComponent
+        CardComponent,
+        CardDetailsComponent
     ],
     imports: [
         BrowserModule,

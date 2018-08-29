@@ -58,5 +58,14 @@ export class ListService {
         console.log('deleteCard', this.cards);
         return this.cards;
     }
+
+    updateCard(card: Card): Card[] {
+        const card1 = this.cards.find(item => item.id === card.id);
+        console.log(card1);
+        card1.title = card.title;
+        card1.description = card.description;
+        card1.dueDate = card.dueDate;
+        return this.cards;
+    }
 }
 

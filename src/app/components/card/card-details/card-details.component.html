@@ -1,0 +1,62 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{modalTitle}}</h4>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="cardTitle">Card Title</label>
+                <input type="text"
+                       class="form-control"
+                       id="cardTitle"
+                       name="cardTitle"
+                       aria-describedby="cardTitle"
+                       placeholder="Enter card title"
+                       [(ngModel)]="title">
+            </div>
+            <div class="form-group">
+                <label for="cardDescription">Card Description</label>
+                <textarea class="form-control"
+                          id="cardDescription"
+                          rows="6"
+                          placeholder="Add card description"
+                          style="resize: none;"
+                          [(ngModel)]="description"
+                          [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="dueDate">Due Date</label>
+                <div class="input-group">
+                    <input id="dueDate"
+                           class="form-control"
+                           placeholder="yyyy-mm-dd"
+                           name="dp"
+                           ngbDatepicker
+                           #dp="ngbDatepicker"
+                           [(ngModel)]="dueDate">
+                    <div class="input-group-append">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                (click)="dp.toggle()">📅
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button
+            type="button"
+            class="btn btn-danger px-4"
+            (click)="deleteCard()">
+            Delete Card
+        </button>
+        <button
+            type="button"
+            class="btn btn-success px-4"
+            (click)="submit()">
+            OK
+        </button>
+    </div>
+</ng-template>

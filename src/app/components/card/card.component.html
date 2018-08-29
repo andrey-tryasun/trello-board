@@ -16,7 +16,7 @@
                 </form>
                 <button type="button"
                         class="btn btn-secondary bg-transparent border-0 ml-1 p-1"
-                        (click)="deleteCard(card.id)">…
+                        (click)="editCard(card)">…
                 </button>
             </div>
             <p *ngIf="card.description"
@@ -35,3 +35,5 @@
         (click)="addCard()">
     + Add a card
 </button>
+
+<app-card-details (submitCard)="updateCard($event)"></app-card-details>
